@@ -36,6 +36,7 @@ h1 {
     perspective: 1000px;
     height: 200px;
     width: 150px;
+    cursor: pointer;
 }
 
 .frente,.verso{
@@ -53,9 +54,13 @@ h1 {
 .verso{
     transform: rotateY(180deg);
 }
-.carta:hover .frente{
+.girar  .frente{
     transform: rotateY(180deg);
 }
-.carta:hover .verso{
+.girar .verso{
     transform: rotateY(0deg);
+}
+.removida{
+    visibility: hidden;
+    cursor: default;
 }
