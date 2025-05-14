@@ -1,3 +1,7 @@
+:root{
+    --fundo-mesa:url("https://images.pexels.com/photos/172276/pexels-photo-172276.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    --fundo-carta: url("https://scontent.fpoa10-1.fna.fbcdn.net/v/t39.30808-6/302153872_369945675341566_5120000728256398833_n.png?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=ii1dQs6fZ6YQ7kNvwE4rIwP&_nc_oc=AdmGErq7M3fNX2V5EFIZBcE8TZboSNLOlD-yYHLF50NuUKMkDXjNLx4ZRYIFYWArSes&_nc_zt=23&_nc_ht=scontent.fpoa10-1.fna&_nc_gid=o09fLlc1DwDhaJQlinoZrg&oh=00_AfLkpT0wagh8yURTvsNiBqodpARilPx-tucCZpSVObGPiQ&oe=682A44CE")
+}
 html {
     padding: 0;
     border: 0;
@@ -15,6 +19,8 @@ section {
 h1 {
     text-align: center;
     font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
 }
 .no-animation *{
     transition: none !important;
@@ -22,21 +28,27 @@ h1 {
 }
 
 .mesa {
-    background: rgb(119, 33, 33);
-    max-width: 95%;
+    background: var(--fundo-mesa);
+    filter: saturate(0.8);
+    max-width: 1690px;
     padding: 30px;
+    margin: 0 auto;
+}
+.mesa .cartas-box{
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 20px;
 }
-
 .carta {
     perspective: 1000px;
     height: 200px;
     width: 150px;
     cursor: pointer;
+}
+.carta:hover{
+    transform: scale(1.05);
 }
 
 .frente,.verso{
@@ -49,7 +61,10 @@ h1 {
     transition: ease-in-out 500ms;
 }
 .frente{
-    background: black;
+    background-image: var(--fundo-carta);
+    background-position: center;
+    background-size: cover;
+    filter: brightness(0.5);
 }
 .verso{
     transform: rotateY(180deg);
@@ -63,4 +78,18 @@ h1 {
 .removida{
     visibility: hidden;
     cursor: default;
+}
+.pontuacao{
+    color: white;
+    font-size: 2rem;
+    border: solid red;
+    position: fixed;
+    right: 3px;
+    bottom: 3px;
+}
+.pontuacao .pontos{
+    font-family: 'Courier New', Courier, monospace;
+}
+.pts-flutuante{
+    color: blue;
 }
