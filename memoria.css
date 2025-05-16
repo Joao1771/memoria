@@ -13,7 +13,8 @@ body {
 }
 
 section {
-    max-height: 100vh;
+    max-height: 200vh;
+    overflow: hidden;
 }
 
 h1 {
@@ -33,6 +34,8 @@ h1 {
     max-width: 1690px;
     padding: 30px;
     margin: 0 auto;
+    border: solid 4px rgb(116, 65, 65);
+    border-radius: 2px;
 }
 .mesa .cartas-box{
     margin: 0 auto;
@@ -53,7 +56,7 @@ h1 {
 
 .frente,.verso{
     border-radius: 10px;
-    border: solid 2px white;
+    border: solid 1px black;
     backface-visibility: hidden;
     width: 100%;
     height: 100%;
@@ -80,16 +83,59 @@ h1 {
     cursor: default;
 }
 .pontuacao{
+    cursor: default;
     color: white;
-    font-size: 2rem;
-    border: solid red;
+    font-size: 3rem;
     position: fixed;
-    right: 3px;
+    width: 3rem;
+    right: 10px;
     bottom: 3px;
 }
 .pontuacao .pontos{
-    font-family: 'Courier New', Courier, monospace;
+    text-shadow: 2px 2px 2px black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.pontuacao .pontos:hover::after{
+    content: "pontos";
+    font-size: 20px;
+    position: relative;
+    bottom: -20px;
+    left: -40px;
 }
 .pts-flutuante{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    position: relative;
     color: blue;
+    animation: subir;
+    animation-duration: 2s;
 }
+#win{
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    margin: 0;
+}
+.win{
+    visibility: visible !important;
+    position: absolute;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    width: 100% !important;
+    height: 100% !important;
+}
+.fundo{
+    position: absolute;
+    height: 1000%;
+    width: 1000%;
+    top: 0;
+    background: rgba(0, 0, 0, 0.527);
+}
+@keyframes subir{
+    from{bottom: -80px;}
+    to{bottom: 100px;}
+}
+    

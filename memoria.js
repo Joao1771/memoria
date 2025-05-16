@@ -9,6 +9,8 @@ function rodar(){
     let n = 0
     let cor = ""
     let pontos = 0
+    let calma
+    let segundos = 0
 
     function rand(min = 0, max = 255){
         return Math.random() * (max - min) - min
@@ -18,6 +20,7 @@ function rodar(){
         const body = document.querySelector("body")
         body.classList.remove("no-animation")
     }
+    setTimeout(voltarAnimacao,500)
 
     function voltarCartas(elemento){
         espera = true
@@ -26,20 +29,44 @@ function rodar(){
     }
 
     function ganhou(){
-        alert("parabens!")
+        const win = document.querySelector("#win")
+        const p = win.querySelector("p")
+        const fundo = document.querySelector("#fundo")
+        win.classList.add("win")
+        fundo.classList.add("fundo")
+        p.innerText = "Você ganhou! Tempo: " + tempoSegundos() + " segundos."
     }
 
-    function pontuacao(){
-        const Ppontos = document.querySelector(".pontos")
-        const p = document.createElement("p")
-        p.innerText = "+1"
-        p.classList.add("pts-flutuante")
-        pontos++
-        Ppontos.innerHTML = pontos
-        Ppontos.append(p)
-        setTimeout(()=>Ppontos.removeChild(p))
+    function tempoSegundos(){
+        setInterval(()=> segundos++,1000)
+        return segundos
     }
-    setTimeout(voltarAnimacao,500)
+    tempoSegundos()
+
+    function pontuacao(){
+        const pPontos = document.querySelector(".pontos")
+        const pFlutuante = document.querySelector("#p")
+        const TempoAnimacao = 2000
+        if(calma){
+            setTimeout(maisum,TempoAnimacao)
+            return
+        }
+        calma = true
+        maisum()
+        function maisum(){
+            pFlutuante.innerText = "+1"
+            pFlutuante.classList.add("pts-flutuante")
+            pontos++
+            pPontos.innerHTML = pontos
+            console.log("rodei")
+
+            setTimeout(() => {
+            pFlutuante.classList.remove("pts-flutuante")
+            pFlutuante.innerText = ""
+            calma = false
+            },TempoAnimacao)
+        }
+    }
 
     // função responsável por colocar background, randomizar e salvar no array "fundos" as cores 
     // escolhidas
@@ -97,6 +124,12 @@ function rodar(){
 
         if(cartaClick && cartas.includes(cartaClick) && !espera){
             girar(cartaClick)
+        }
+    })
+    document.addEventListener("keyup",function(e){
+        if(e.key == "j"){
+            pontuacao()
+            ganhou()
         }
     })
 }
