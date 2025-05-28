@@ -1,11 +1,12 @@
 :root{
-    --fundo-mesa:url("https://images.pexels.com/photos/172276/pexels-photo-172276.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-    --fundo-carta: url("https://scontent.fpoa10-1.fna.fbcdn.net/v/t39.30808-6/302153872_369945675341566_5120000728256398833_n.png?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=ii1dQs6fZ6YQ7kNvwE4rIwP&_nc_oc=AdmGErq7M3fNX2V5EFIZBcE8TZboSNLOlD-yYHLF50NuUKMkDXjNLx4ZRYIFYWArSes&_nc_zt=23&_nc_ht=scontent.fpoa10-1.fna&_nc_gid=o09fLlc1DwDhaJQlinoZrg&oh=00_AfLkpT0wagh8yURTvsNiBqodpARilPx-tucCZpSVObGPiQ&oe=682A44CE")
+    --fundo-mesa:url("./media/fundo-mesa.jpeg");
+    --fundo-carta: url("./media/fundo-carta.jpg")
 }
 html {
     padding: 0;
     border: 0;
     box-sizing: border-box;
+    overflow-x:hidden ;
 }
 
 body {
@@ -123,14 +124,15 @@ h1 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     top: 0;
     width: 100% !important;
     height: 100% !important;
 }
 .fundo{
     position: absolute;
-    height: 1000%;
-    width: 1000%;
+    height: 250%;
+    width: 100%;
     top: 0;
     background: rgba(0, 0, 0, 0.527);
 }

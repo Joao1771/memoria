@@ -16,33 +16,38 @@ function rodar(){
         return Math.random() * (max - min) - min
     }
 
+    //função só para não trigar o css antes de carregar
     function voltarAnimacao(){
         const body = document.querySelector("body")
         body.classList.remove("no-animation")
     }
     setTimeout(voltarAnimacao,500)
 
+    //função responsável por voltar as cartas em 6s após duas serem escolhidas
     function voltarCartas(elemento){
         espera = true
         setTimeout(()=>elemento.classList.remove("girar"),600)
         setTimeout(()=>espera = false,650)
     }
 
+    //função que expõe a div win e diz os segundos que demorou para acabar o jogo
     function ganhou(){
         const win = document.querySelector("#win")
         const p = win.querySelector("p")
         const fundo = document.querySelector("#fundo")
         win.classList.add("win")
         fundo.classList.add("fundo")
-        p.innerText = "Você ganhou! Tempo: " + tempoSegundos() + " segundos."
+        p.innerHTML = "Você ganhou! Tempo: " + tempoSegundos() + " segundos. <br> Jogo feito por João Flávio"
     }
 
+    //função que só retorna o tempo em segundos quando é ativada
     function tempoSegundos(){
         setInterval(()=> segundos++,1000)
         return segundos
     }
     tempoSegundos()
-
+    
+    //função que cria e aumenta uma pontuação. Também cria um +1 e põe classe que sobe
     function pontuacao(){
         const pPontos = document.querySelector(".pontos")
         const pFlutuante = document.querySelector("#p")
@@ -124,12 +129,6 @@ function rodar(){
 
         if(cartaClick && cartas.includes(cartaClick) && !espera){
             girar(cartaClick)
-        }
-    })
-    document.addEventListener("keyup",function(e){
-        if(e.key == "j"){
-            pontuacao()
-            ganhou()
         }
     })
 }
