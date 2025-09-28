@@ -2,8 +2,7 @@ function rodar(){
     const mesa = document.querySelector(".mesa")
     const versos = document.querySelectorAll(".verso")
     const cartas = Array.from(document.querySelectorAll(".carta"))
-    let fundos = []
-    let cont = 0
+
     let removidas = 0
     let espera = false
     let n = 0
@@ -11,9 +10,20 @@ function rodar(){
     let pontos = 0
     let calma
     let segundos = 0
+    let animais = 
+        ["media/cartas/arara.jpg","media/cartas/bemtevi.jpg","media/cartas/leao.jpg",
+        "media/cartas/hipopotamo.jpg","media/cartas/cavalo.jpg","media/cartas/touro.jpg",
+        "media/cartas/onca.jpg","media/cartas/tigre.jpg","media/cartas/gato.jpg",
+        "media/cartas/picapau.jpg","media/cartas/flamingo.jpg","media/cartas/guepardo.jpg",
+        "media/cartas/cachorro.jpg","media/cartas/elefante.jpg","media/cartas/escorpiao.jpg",
+        "media/cartas/arara.jpg","media/cartas/bemtevi.jpg","media/cartas/leao.jpg",
+        "media/cartas/hipopotamo.jpg","media/cartas/cavalo.jpg","media/cartas/touro.jpg",
+        "media/cartas/onca.jpg","media/cartas/tigre.jpg","media/cartas/gato.jpg",
+        "media/cartas/picapau.jpg","media/cartas/flamingo.jpg","media/cartas/guepardo.jpg",
+        "media/cartas/cachorro.jpg","media/cartas/elefante.jpg","media/cartas/escorpiao.jpg"]
 
-    function rand(min = 0, max = 255){
-        return Math.random() * (max - min) - min
+    function rand(min = 0, max = 30){
+        return Math.floor(Math.random() * (max - min) - min)
     }
 
     //função só para não trigar o css antes de carregar
@@ -73,25 +83,15 @@ function rodar(){
         }
     }
 
-    // função responsável por colocar background, randomizar e salvar no array "fundos" as cores 
-    // escolhidas
-    function pintar(){
-        let cores = []
-        let corEscolhida
-        while (cont<versos.length / 2){ // enquanto for a metade do total das cartas
-            corEscolhida = `rgb(${Math.floor(rand())},${Math.floor(rand())},${Math.floor(rand())})`
-            cores.push(corEscolhida,corEscolhida) // coloca uma cor em cores
-            cont++
-        }
-        cont = 0
+    // função responsável por colocar background e randomizar os fundos das cartas
+    function colocarFundos(){ // co
         for(let carta of versos){
-            corEscolhida = Math.floor(rand(0,cores.length)) //escolhe um número entre 0 e cartas.length
-            carta.style.background = cores[corEscolhida] // coloca a cor no background de cada carta
-            fundos.push(cores[corEscolhida])
-            cores.splice(cores.indexOf(cores[corEscolhida]), 1)
+            animalEscolhido = animais[rand(0,animais.length)] //escolhe um elemento de indice rand(0 ate tamanho de animais)
+            carta.style.backgroundImage = `url(${animalEscolhido})` // poe o fundo
+            animais.splice(animais.indexOf(animalEscolhido), 1) // tira o elemento de animais
         }
     }
-    pintar()
+    colocarFundos()
 
     // "remove" os pares de cartas iguais (igual no jogo de memória mesmo)
     function removerCartas(){
@@ -112,9 +112,9 @@ function rodar(){
             n++
         }else return
         if(n < 2){
-             cor = cartaEscolhida.style.background
+             cor = cartaEscolhida.style.backgroundImage
         }else{
-            if(cartaEscolhida.style.background == cor) removerCartas()
+            if(cartaEscolhida.style.backgroundImage == cor) removerCartas()
         }
         for(let carta of cartas){
             if(n >= 2 && carta.classList.contains("girar")){

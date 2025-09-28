@@ -72,6 +72,8 @@ h1 {
 }
 .verso{
     transform: rotateY(180deg);
+    background-position: center;
+    background-size: cover;
 }
 .girar  .frente{
     transform: rotateY(180deg);
