@@ -2,6 +2,7 @@ function rodar(){
     const mesa = document.querySelector(".mesa")
     const versos = document.querySelectorAll(".verso")
     const cartas = Array.from(document.querySelectorAll(".carta"))
+    const jogarDeNovo = document.querySelector("#again")
 
     let removidas = 0
     let espera = false
@@ -11,16 +12,11 @@ function rodar(){
     let calma
     let segundos = 0
     let animais = 
-        ["media/cartas/arara.jpg","media/cartas/bemtevi.jpg","media/cartas/leao.jpg",
-        "media/cartas/hipopotamo.jpg","media/cartas/cavalo.jpg","media/cartas/touro.jpg",
-        "media/cartas/onca.jpg","media/cartas/tigre.jpg","media/cartas/gato.jpg",
-        "media/cartas/picapau.jpg","media/cartas/flamingo.jpg","media/cartas/guepardo.jpg",
-        "media/cartas/cachorro.jpg","media/cartas/elefante.jpg","media/cartas/escorpiao.jpg",
-        "media/cartas/arara.jpg","media/cartas/bemtevi.jpg","media/cartas/leao.jpg",
-        "media/cartas/hipopotamo.jpg","media/cartas/cavalo.jpg","media/cartas/touro.jpg",
-        "media/cartas/onca.jpg","media/cartas/tigre.jpg","media/cartas/gato.jpg",
-        "media/cartas/picapau.jpg","media/cartas/flamingo.jpg","media/cartas/guepardo.jpg",
-        "media/cartas/cachorro.jpg","media/cartas/elefante.jpg","media/cartas/escorpiao.jpg"]
+        ["arara","bemtevi","leao","hipopotamo","cavalo","touro","onca","tigre","gato",
+        "picapau","flamingo","guepardo","cachorro","elefante","escorpiao",
+        "arara","bemtevi","leao","hipopotamo","cavalo","touro",
+        "onca","tigre","gato","picapau","flamingo","guepardo",
+        "cachorro","elefante","escorpiao"]
 
     function rand(min = 0, max = 30){
         return Math.floor(Math.random() * (max - min) - min)
@@ -31,7 +27,6 @@ function rodar(){
         const body = document.querySelector("body")
         body.classList.remove("no-animation")
     }
-    setTimeout(voltarAnimacao,500)
 
     //função responsável por voltar as cartas em 6s após duas serem escolhidas
     function voltarCartas(elemento){
@@ -47,7 +42,7 @@ function rodar(){
         const fundo = document.querySelector("#fundo")
         win.classList.add("win")
         fundo.classList.add("fundo")
-        p.innerHTML = "Você ganhou! Tempo: " + tempoSegundos() + " segundos. <br> Jogo feito por João Flávio"
+        p.innerHTML = "Você ganhou! <br> Tempo: " + tempoSegundos() + " segundos. <br> Jogo feito por João Flávio"
     }
 
     //função que só retorna o tempo em segundos quando é ativada
@@ -55,7 +50,6 @@ function rodar(){
         setInterval(()=> segundos++,1000)
         return segundos
     }
-    tempoSegundos()
     
     //função que cria e aumenta uma pontuação. Também cria um +1 e põe classe que sobe
     function pontuacao(){
@@ -73,7 +67,6 @@ function rodar(){
             pFlutuante.classList.add("pts-flutuante")
             pontos++
             pPontos.innerHTML = pontos
-            console.log("rodei")
 
             setTimeout(() => {
             pFlutuante.classList.remove("pts-flutuante")
@@ -84,14 +77,13 @@ function rodar(){
     }
 
     // função responsável por colocar background e randomizar os fundos das cartas
-    function colocarFundos(){ // co
+    function colocarFundos(){
         for(let carta of versos){
             animalEscolhido = animais[rand(0,animais.length)] //escolhe um elemento de indice rand(0 ate tamanho de animais)
-            carta.style.backgroundImage = `url(${animalEscolhido})` // poe o fundo
+            carta.style.backgroundImage = `url(media/cartas/${animalEscolhido}.jpg)` // poe o fundo
             animais.splice(animais.indexOf(animalEscolhido), 1) // tira o elemento de animais
         }
     }
-    colocarFundos()
 
     // "remove" os pares de cartas iguais (igual no jogo de memória mesmo)
     function removerCartas(){
@@ -124,6 +116,10 @@ function rodar(){
         if(n >= 2) n = 0
     }
 
+    setTimeout(voltarAnimacao,500)
+    tempoSegundos()
+    colocarFundos()
+
     mesa.addEventListener("click", function(e){
         const cartaClick = e.target.closest(".carta")
 
@@ -131,4 +127,6 @@ function rodar(){
             girar(cartaClick)
         }
     })
+
+    jogarDeNovo.addEventListener("click", () => location.reload())
 }
